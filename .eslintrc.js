@@ -15,7 +15,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'config/webpack.config.dev.js'
+        config: 'webpack.config.dev.js'
       }
     },
   },
@@ -51,6 +51,9 @@ module.exports = {
     "react/jsx-filename-extension": ['warn', { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/anchor-is-valid":'off',
     "no-debugger":'off',
-    "arrow-parens": ['error', "as-needed"]
+    "arrow-parens": ['error', "as-needed"],
+    "lines-between-class-members":'off',
+    "react/jsx-one-expression-per-line":'off',
+    "comma-dangle": ["error", "never"]
   }
 }

@@ -5,7 +5,7 @@
   "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open --progress --config webpack.config.dev.js",
+    "start": "webpack-dev-server --colors --progress --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js"
   },
   "author": "",
@@ -34,6 +34,7 @@
     "redux-devtools-extension": "^2.13.5",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.2",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
   },

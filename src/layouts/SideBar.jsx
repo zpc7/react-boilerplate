@@ -11,7 +11,7 @@ export default class SideBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapsed: false, // 展开/收起状态
+      collapsed: false // 展开/收起状态
     };
   }
   // 展开-收起时的回调函数
@@ -25,12 +25,7 @@ export default class SideBar extends React.Component {
   render() {
     const { collapsed } = this.state;
     return (
-      <Sider
-        collapsible
-        className="SIDEBAR"
-        collapsed={collapsed}
-        onCollapse={this.onCollapse}
-      >
+      <Sider collapsible className="SIDEBAR" collapsed={collapsed} onCollapse={this.onCollapse}>
         <div className="logo" />
         <Menu
           mode="inline"
@@ -40,8 +35,7 @@ export default class SideBar extends React.Component {
         >
           <Menu.Item key="home">
             <Link to="/home">
-              <Icon type="home" />
-              <span>Home</span>
+              <Icon type="home" /><span>Home</span>
             </Link>
           </Menu.Item>
           <Menu.Item key="2">

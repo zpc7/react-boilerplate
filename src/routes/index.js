@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Switch, Link } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import SideBar from '../layouts/SideBar';
@@ -35,12 +35,9 @@ class App extends React.Component {
   }
 }
 
-const layout = data => <App />;
-
-
 const Routes = () => (
-  <Router>
-    <Route path="/" render={layout} />
-  </Router>);
+  <HashRouter>
+    <Route path="/" component={App} />
+  </HashRouter>);
 
 export default Routes;

@@ -3,13 +3,15 @@ import axios from 'axios';
 import echarts from 'echarts';
 import { Card } from 'antd';
 
+// 引入 ECharts 主模块
+// const echarts = require('echarts/lib/echarts');
 
 // 模拟计划制作一个github相关的统计
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartData: [0, 0, 0, 0, 0, 0],
+      chartData: [0, 0, 0, 0, 0, 0]
     };
   }
 
@@ -22,7 +24,7 @@ export default class Home extends React.Component {
       axios.get('https://api.github.com/repos/angular/angular'),
       axios.get('https://api.github.com/repos/facebook/react-native'),
       axios.get('https://api.github.com/repos/reactjs/redux'),
-      axios.get('https://api.github.com/repos/alibaba/weex'),
+      axios.get('https://api.github.com/repos/alibaba/weex')
     ])
       .then(resultArr => {
         const chartData = resultArr.map(item => item.data.stargazers_count);
@@ -54,26 +56,26 @@ export default class Home extends React.Component {
         axisPointer: {
           type: 'cross',
           label: {
-            backgroundColor: '#6a7985',
-          },
-        },
+            backgroundColor: '#6a7985'
+          }
+        }
       },
       grid: {
         left: '3%',
         right: '4%',
         bottom: '3%',
-        containLabel: true,
+        containLabel: true
       },
       xAxis: [
         {
           type: 'category',
-          data: ['React', 'Vue', 'Angular', 'React Native', 'Redux', 'Weex'],
-        },
+          data: ['React', 'Vue', 'Angular', 'React Native', 'Redux', 'Weex']
+        }
       ],
       yAxis: [
         {
-          type: 'value',
-        },
+          type: 'value'
+        }
       ],
       series: [
         {
@@ -84,11 +86,11 @@ export default class Home extends React.Component {
           label: {
             normal: {
               show: true,
-              position: 'top',
-            },
-          },
-        },
-      ],
+              position: 'top'
+            }
+          }
+        }
+      ]
     });
   };
 

@@ -1,60 +1,75 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
+const path = require('path');
+
 
 module.exports = {
-  mode: "development",
-  entry: path.resolve(__dirname, "src/index.js"),
+  mode: 'development',
+  entry: {
+    main: path.resolve(__dirname, 'src/index.js')
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  // devtool: 'inline-source-map',
+  // webpack-dev-server config
+  devServer: {
+    contentBase: [path.resolve(__dirname, 'dist')],
+    hot: true,
+    compress: true,
+    // open: true,
+    host: '0.0.0.0',
+    port: 3000
+  },
   resolve: {
-    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
+    alias: {
+      appSrc: path.resolve(__dirname, 'src')
+    },
+    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx']
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
+        include: path.resolve(__dirname, 'src'),
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       }, {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
-            options: {
-              minimize: true
-            }
+            loader: 'html-loader',
+            options: { minimize: true }
           }
         ]
       }, {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-        // use: [MiniCssExtractPlugin.loader, "style-loader","css-loader"]
+        use: ['style-loader', 'css-loader']
       }, {
         test: /\.less$/,
         use: [
+          { loader: 'style-loader' },
           {
-            loader: "style-loader"
-          }, {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               javascriptEnabled: true,
               minimize: false,
               sourceMap: true
             }
           }, {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               javascriptEnabled: true,
               sourceMap: true
             }
           }, {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               javascriptEnabled: true,
               sourceMap: true
@@ -65,9 +80,9 @@ module.exports = {
         test: /\.(jpg|jpeg|png|svg|gif|cur|ico)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "images/[name][hash:8].[ext]" //遇到图片  生成一个images文件夹  名字.后缀的图片
+              name: 'images/[name][hash:8].[ext]' // 遇到图片  生成一个images文件夹  名字.后缀的图片
             }
           }
         ]
@@ -77,13 +92,44 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebPackPlugin({template: "./public/index.html", filename: "./index.html"}),
-    // new MiniCssExtractPlugin({filename: "[name].css", chunkFilename: "[id].css"}),
-    new CopyWebpackPlugin([
-      {
-        from: __dirname + '/public'
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        },
+        commons: {
+          name: 'commons',
+          minChunks: 2,
+          chunks: 'initial'
+        }
       }
-    ])
+      // cacheGroups: {
+      //   vendors: {
+      //     name: 'vendors',
+      //     test: /[\\/]node_modules[\\/]/,
+      //     chunks: 'all',
+      //     priority: 10,
+      //     enforce: true
+      //   },
+      //   commons: {
+      //     name: 'commons',
+      //     chunks: 'initial',
+      //     minChunks: 2,
+      //     maxInitialRequests: 5,
+      //     minSize: 0
+      //   }
+      // }
+    },
+    runtimeChunk: {}
+  },
+  plugins: [
+    new HtmlWebPackPlugin({ template: path.resolve(__dirname, 'public/index.html'), filename: 'index.html' }),
+    new CopyWebpackPlugin([{ from: `${__dirname}/public` }]),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+    // new BundleAnalyzerPlugin()
   ]
-}
+};
