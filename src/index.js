@@ -5,6 +5,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 // 安装redux-devtools-extension的可视化工具。
 import { composeWithDevTools } from 'redux-devtools-extension';
+import _ from 'lodash';
+
 
 import './main.css';
 // 路由

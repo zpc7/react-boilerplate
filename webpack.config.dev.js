@@ -16,7 +16,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   // devtool: 'inline-source-map',
-  // webpack-dev-server config
   devServer: {
     contentBase: [path.resolve(__dirname, 'dist')],
     hot: true,
@@ -29,7 +28,8 @@ module.exports = {
     alias: {
       appSrc: path.resolve(__dirname, 'src')
     },
-    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx']
+    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
+    modules: ['node_modules']
   },
   module: {
     rules: [
@@ -104,26 +104,19 @@ module.exports = {
           name: 'commons',
           minChunks: 2,
           chunks: 'initial'
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          minChunks: 2,
+          enforce: true
         }
       }
-      // cacheGroups: {
-      //   vendors: {
-      //     name: 'vendors',
-      //     test: /[\\/]node_modules[\\/]/,
-      //     chunks: 'all',
-      //     priority: 10,
-      //     enforce: true
-      //   },
-      //   commons: {
-      //     name: 'commons',
-      //     chunks: 'initial',
-      //     minChunks: 2,
-      //     maxInitialRequests: 5,
-      //     minSize: 0
-      //   }
-      // }
     },
-    runtimeChunk: {}
+    runtimeChunk: {
+      name: 'runtime'
+    }
   },
   plugins: [
     new HtmlWebPackPlugin({ template: path.resolve(__dirname, 'public/index.html'), filename: 'index.html' }),

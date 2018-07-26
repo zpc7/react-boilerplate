@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import echarts from 'echarts';
+// import echarts from 'echarts';
 import { Card } from 'antd';
 
 // 引入 ECharts 主模块
-// const echarts = require('echarts/lib/echarts');
+const echarts = require('echarts/lib/echarts');
+// 引入柱状图
+require('echarts/lib/chart/bar');
+// 引入提示框和标题组件
+require('echarts/lib/component/tooltip');
+require('echarts/lib/component/title');
 
 // 模拟计划制作一个github相关的统计
 export default class Home extends React.Component {
