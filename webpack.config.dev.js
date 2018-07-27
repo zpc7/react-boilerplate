@@ -1,5 +1,4 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
@@ -37,17 +36,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'src'),
-        use: {
-          loader: 'babel-loader'
-        }
+        use: { loader: 'babel-loader' }
       }, {
         test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: { minimize: true }
-          }
-        ]
+        use: [{ loader: 'html-loader', options: { minimize: true } }]
       }, {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
@@ -57,23 +49,13 @@ module.exports = {
           { loader: 'style-loader' },
           {
             loader: 'css-loader',
-            options: {
-              javascriptEnabled: true,
-              minimize: false,
-              sourceMap: true
-            }
+            options: { javascriptEnabled: true, sourceMap: true, minimize: false }
           }, {
             loader: 'postcss-loader',
-            options: {
-              javascriptEnabled: true,
-              sourceMap: true
-            }
+            options: { javascriptEnabled: true, sourceMap: true }
           }, {
             loader: 'less-loader',
-            options: {
-              javascriptEnabled: true,
-              sourceMap: true
-            }
+            options: { javascriptEnabled: true, sourceMap: true }
           }
         ]
       }, {
@@ -82,7 +64,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'images/[name][hash:8].[ext]' // 遇到图片  生成一个images文件夹  名字.后缀的图片
+              name: 'images/[name][hash:8].[ext]'
             }
           }
         ]
