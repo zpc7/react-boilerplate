@@ -36,8 +36,8 @@ class App extends React.Component {
 }
 
 const Routes = () => (
-  <HashRouter>
+  <BrowserRouter>
     <Route path="/" component={App} />
-  </HashRouter>);
+  </BrowserRouter>);
 
 export default Routes;
