@@ -1,8 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const tsImportPluginFactory = require('ts-import-plugin');
+const tsImportPluginFactory = require('ts-import-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   mode: "development",
@@ -17,12 +17,15 @@ module.exports = {
     hot: true,
     compress: true,
     historyApiFallback: true,
-    open: true,
+    // open: true,
     host: '0.0.0.0',
     port: 8000
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      "@": path.resolve(__dirname, "src")
+    },
+    extensions: [".tsx", ".ts", ".js"]
   },
   module: {
     rules: [
@@ -76,6 +79,6 @@ module.exports = {
       template: path.resolve(__dirname, 'public/index.html'),
       filename: 'index.html'
     }),
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ]
 };

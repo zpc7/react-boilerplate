@@ -1,7 +1,6 @@
 import React from 'react';
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu } from "antd";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import Business from '../Pages/business/Business';
 
 import './Routes.less';
 
@@ -27,17 +26,14 @@ export default class Routes extends React.Component {
             <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
               <Menu.Item key="1">
                 <Link to='/'>
-                  <Icon type="user" />
                   <span>Home</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="2">
-                <Icon type="video-camera" />
                 <span>nav 2</span>
               </Menu.Item>
               <Menu.Item key="3">
                 <Link to='/test'>
-                  <Icon type="upload" />
                   <span>nav test</span>
                 </Link>
               </Menu.Item>
@@ -45,16 +41,11 @@ export default class Routes extends React.Component {
           </Sider>
           <Layout>
             <Header id='header'>
-              <Icon
-                className="trigger"
-                type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
-                onClick={this.toggle}
-              />
             </Header>
             <Content id='content'>
               <Switch>
-                <Route key='test' path='/test' render={() => <div>content</div>} />
-                <Route exact path="/" component={Business} />
+                <Route exact path="/" render={() => <div>content</div>} />
+                <Route key='test' path='/test' render={() => <div>content Test</div>} />
               </Switch>
             </Content>
           </Layout>

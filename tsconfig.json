@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "alwaysStrict": true,
-    "pretty": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "target": "es5",
+    "outDir": "./dist/", // 重定向输出目录
+    "pretty": true, // 给错误和消息设置样式，使用颜色和上下文。
+    "noUnusedLocals": false, // 若有未使用的局部变量则抛错。
+    "noUnusedParameters": false, //若有未使用的参数则抛错。
+    "skipLibCheck": true, // 忽略所有的声明文件（ *.d.ts）的类型检查。
+    "target": "ES5", // 指定ECMAScript目标版本
+    "module": "ESNext", // 指定生成哪个模块系统代码
+    "moduleResolution": "Node", // 指定使用哪种模块解析策略
+    "allowJs": true, // 允许编译javascript文件
     "lib": [
       "DOM",
       "ES5",
@@ -15,15 +16,21 @@
       "es2015.generator",
       "es2015.iterable",
       "es2015.promise"
-    ],
-    "module": "esnext",
-    "noEmit": false,
-    "jsx": "react",
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    ], //编译过程中需要引入的库文件的列表
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "sourceMap": true,
+    "jsx": "react", // 在 .tsx文件里支持JSX
+    "strict": true, //启用所有严格类型检查选项。
+    "noImplicitAny": true, // 在表达式和声明上有隐含的 any类型时报错。
+    "noImplicitReturns": true, //  不是函数的所有返回路径都有返回值时报错。
+    "noFallthroughCasesInSwitch": true, // 报告switch语句的fallthrough错误。（即，不允许switch的case语句贯穿）
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
+    "experimentalDecorators": true, // 启用实验性的ES装饰器。
   },
   "exclude": [
     "node_modules"
